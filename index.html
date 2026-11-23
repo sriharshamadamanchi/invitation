@@ -631,6 +631,35 @@ body{overflow-wrap:break-word}
 
 /* script names: never clip the swashes */
 .couple .cp-line,.couple .cp-line text{overflow:visible}
+
+/* =========================================================
+   ENGAGEMENT — extra event details
+   ========================================================= */
+.event:nth-child(even){--st:.3s}
+.event .from{display:block;font-family:var(--caps);font-weight:400;font-size:13px;letter-spacing:.3em;text-transform:uppercase;line-height:1.4;margin-bottom:2px}
+.event .ev-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
+.event .ev-actions .btn{margin-top:0;padding:11px 16px;font-size:13px;letter-spacing:.12em;gap:8px}
+.event .ev-actions{opacity:0;transform:translateY(16px);transition:opacity .7s ease calc(var(--st,0s) + 1.8s),transform .9s var(--ease) calc(var(--st,0s) + 1.8s)}
+.event.in .ev-actions{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.event .ev-actions{opacity:1!important;transform:none!important}}
+
+/* engagement: feast line */
+.event .extra{display:inline-block;margin-top:14px;padding:6px 16px;border-radius:999px;font-family:var(--caps);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--rani-d);
+  background:linear-gradient(135deg,#fffdf7,#fbeccb) padding-box,var(--gold-grad) border-box;border:1.5px solid transparent}
+
+/* live stream card */
+.event.stream .ic svg{width:52px;height:52px;color:#e62117}
+.event .live-dot{display:inline-block;width:8px;height:8px;margin:0 8px 1px 0;border-radius:50%;background:#ff4d4d;box-shadow:0 0 0 0 rgba(255,77,77,.7);animation:livepulse 1.8s ease-out infinite;vertical-align:middle}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(255,77,77,.7)}100%{box-shadow:0 0 0 9px rgba(255,77,77,0)}}
+.event .yt{position:relative;margin:20px auto 0;max-width:420px;aspect-ratio:16/9;border-radius:14px;padding:4px;background:var(--gold-grad);box-shadow:0 14px 30px rgba(8,40,26,.18)}
+.event .yt iframe,.event .yt img{display:block;width:100%;height:100%;border:0;border-radius:10px;background:#0b3d28;object-fit:cover}
+a.yt{display:block;cursor:pointer}
+.yt-play{position:absolute;inset:4px;border-radius:10px;display:grid;place-items:center;background:radial-gradient(circle,rgba(0,0,0,.05),rgba(0,0,0,.35));transition:background .3s}
+.yt-play svg{width:68px;height:68px;color:#e62117;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4));transition:transform .3s}
+a.yt:hover .yt-play svg{transform:scale(1.1)}
+.event .extra,.event .yt{opacity:0;transform:translateY(16px);transition:opacity .7s ease calc(var(--st,0s) + 1.4s),transform .9s var(--ease) calc(var(--st,0s) + 1.4s)}
+.event.in .extra,.event.in .yt{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.event .extra,.event .yt{opacity:1!important;transform:none!important}.event .live-dot{animation:none}}
 </style>
 </head>
 <body class="locked">
@@ -808,6 +837,14 @@ body{overflow-wrap:break-word}
 /* =========================================================
    ✏️  EDIT YOUR WEDDING DETAILS HERE
    ========================================================= */
+const ENGAGEMENT = {
+  start: "2026-11-26T09:30:00+05:30",
+  feast: "2026-11-26T12:00:00+05:30",
+  end:   "2026-11-26T15:00:00+05:30",       // used for "Save the Date"
+  venue: "Minerva Grand, Vijayawada",
+  mapQuery: "Minerva Grand, Vijayawada",
+  live: "https://www.youtube.com/live/z_6-KGE9qQs"
+};
 const CONFIG = {
   bride: "Kiranmayi",
   groom: "Sriharsha",
@@ -827,7 +864,16 @@ const CONFIG = {
     "With the blessings of our families, two hearts found their way home to each other.",
     "Now we begin our greatest journey yet — a lifetime together — and we would love for you to be there."
   ],
+  engagement: ENGAGEMENT,
+  // events with a `date` / `venue` use those; the rest use the wedding date & venue above
   events: [
+    { name: "Engagement", tag: "Nischitartham", time: "9:30 AM", from: true, icon: "rings", featured: true,
+      date: ENGAGEMENT.start, venue: ENGAGEMENT.venue, mapQuery: ENGAGEMENT.mapQuery,
+      extra: "Feast from 12:00 PM",
+      text: "The exchange of rings with the blessings of both our families, followed by a festive lunch." },
+    // live stream card, shown beside the engagement
+    { stream: ENGAGEMENT.live, date: ENGAGEMENT.start, time: "9:30 AM",
+      text: "Can't be there in person? Join us online and send your blessings." },
     { name: "Muhurtham", tag: "The Wedding", time: "8:26 PM", icon: "kalash", featured: true,
       text: "The auspicious moment we tie the knot, amidst Vedic chants and the blessings of our elders." },
     { name: "Dinner", tag: "Wedding Feast", time: "7:00 PM", icon: "leaf",
@@ -1026,6 +1072,10 @@ const ICONS = {
     <path d="M44 66l6-6 6 6-6 6z" fill="#c2185b"/></g>`,
   leaf: `<g><path d="M6 42C10 22 34 10 62 12c-2 22-22 40-50 36z" fill="url(#gLeaf)"/><path d="M10 46C24 32 40 22 60 14" stroke="#b9e3a8" stroke-width="1.2" fill="none"/>
     <circle cx="26" cy="34" r="5" fill="#fff8e7"/><circle cx="38" cy="27" r="4" fill="#ffb300"/><circle cx="47" cy="22" r="3.4" fill="#e53935"/><circle cx="34" cy="37" r="3" fill="#f57c00"/><circle cx="44" cy="31" r="3" fill="#7cb342"/></g>`,
+  rings: `<g fill="none" stroke-width="6"><circle cx="39" cy="52" r="21" stroke="url(#gGold)"/><circle cx="61" cy="52" r="21" stroke="url(#gGold)"/></g>
+    <path d="M39 31l-8-9 4-7h8l4 7z" fill="#eef7ff" stroke="#9a6512" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M31 22h16M35 15l4 16 4-16" fill="none" stroke="#9a6512" stroke-width=".8"/>
+    <path d="M70 12v8M66 16h8M80 24v5M77.5 26.5h5" stroke="#c99626" stroke-width="1.6" stroke-linecap="round"/>`,
   lotus: `<path d="M0 13H62M118 13H180" stroke="url(#gGold)" stroke-width="1.4"/>
     <g fill="none" stroke="#c08a1e" stroke-width="1.3"><path d="M90 3c-6 6-6 14 0 20 6-6 6-14 0-20z" fill="#f8d7e0"/><path d="M90 23c-4-6-12-9-19-7 3 6 11 9 19 7zM90 23c4-6 12-9 19-7-3 6-11 9-19 7z" fill="#fbe3ea"/><path d="M90 23c-8-1-15 1-20 5M90 23c8-1 15 1 20 5"/></g>
     <circle cx="66" cy="13" r="2.2" fill="#c08a1e"/><circle cx="114" cy="13" r="2.2" fill="#c08a1e"/>`,
@@ -1055,16 +1105,55 @@ $('#portrait').innerHTML = CONFIG.photo
        </div>
      </div>`;
 
-$('#eventGrid').innerHTML = CONFIG.events.map((e, i) => `
-  <article class="event reveal d${i} ${e.featured ? 'featured' : ''}" data-arch>
-    <div class="ic"><svg viewBox="${e.icon === 'kalash' ? '0 0 100 112' : '0 0 68 58'}">${ICONS[e.icon]}</svg></div>
+const ICON_BOX = {kalash: '0 0 100 112', rings: '14 8 72 70', leaf: '0 0 68 58'};
+const YT_ICON = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.75 15V9l5.75 3z"/></svg>`;
+const DIR_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8z"/></svg>`;
+function streamCard(e, i, when){
+  const id = e.stream.split(/[/?=&]/).filter(Boolean).pop();
+  return `
+  <article class="event stream reveal d${Math.min(i, 3)}" data-arch>
+    <div class="ic">${YT_ICON}</div>
+    <span class="tag"><i class="live-dot"></i>Live Stream</span>
+    <h3>Watch Live</h3>
+    <div class="when">${when}<br>from ${e.time}</div>
+    <a class="yt" href="${e.stream}" target="_blank" rel="noopener" data-yt="${id}" aria-label="Play the engagement live stream">
+      <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+      <span class="yt-play"><svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2.3 34 .3 34 .3s-21.2 0-26.5 1.4a8.6 8.6 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.6 8.6 0 0 0 6 6C12.8 47.7 34 47.7 34 47.7s21.2 0 26.5-1.4a8.6 8.6 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#e62117"/><path d="M27 34V14l18 10z" fill="#fff"/></svg></span>
+    </a>
+    <p>${e.text}</p>
+    <div class="ev-actions"><a class="btn primary" href="${e.stream}" target="_blank" rel="noopener">${YT_ICON}Open on YouTube</a></div>
+  </article>`;
+}
+$('#eventGrid').innerHTML = CONFIG.events.map((e, i) => {
+  const when = e.date ? fmt({weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}, new Date(e.date)) : B.dateLong;
+  if (e.stream) return streamCard(e, i, when);
+  const actions = [
+    e.live ? `<a class="btn primary" href="${e.live}" target="_blank" rel="noopener">${YT_ICON}Watch Live</a>` : '',
+    e.mapQuery ? `<a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.mapQuery)}" target="_blank" rel="noopener">${DIR_ICON}Directions</a>` : ''
+  ].join('');
+  return `
+  <article class="event reveal d${Math.min(i, 3)} ${e.featured ? 'featured' : ''}" data-arch>
+    <div class="ic"><svg viewBox="${ICON_BOX[e.icon]}">${ICONS[e.icon]}</svg></div>
     <span class="tag">${e.tag}</span>
     <h3>${e.name}</h3>
-    <div class="time gold-text">${e.time.replace(/\s*(AM|PM)$/i, ' <span class="ampm">$1</span>')}</div>
-    <div class="when">${B.dateLong}</div>
+    <div class="time gold-text">${e.from ? '<span class="from">from</span>' : ''}${e.time.replace(/\s*(AM|PM)$/i, ' <span class="ampm">$1</span>')}</div>
+    <div class="when">${when}</div>
+    ${e.extra ? `<div class="extra">${e.extra}</div>` : ''}
     <p>${e.text}</p>
-    <div class="place"><svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>${CONFIG.venue.name}</span></div>
-  </article>`).join('');
+    <div class="place"><svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>${e.venue || CONFIG.venue.name}</span></div>
+    ${actions ? `<div class="ev-actions">${actions}</div>` : ''}
+  </article>`;
+}).join('');
+
+// live stream: a thumbnail until tapped, then the YouTube player in place
+// (embeds only work on a real website, so a locally opened page just opens YouTube)
+$$('[data-yt]').forEach(a => a.addEventListener('click', ev => {
+  if (!/^https?:$/.test(location.protocol)) return;
+  ev.preventDefault();
+  a.outerHTML = `<div class="yt"><iframe src="https://www.youtube.com/embed/${a.dataset.yt}?autoplay=1&rel=0" title="Engagement live stream"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`;
+}));
 
 $('#cal').innerHTML = [-2,-1,0,1,2].map(k => {
   const d = new Date(M.getTime() + k*864e5), n = fmt({day:'numeric'}, d);
@@ -1109,7 +1198,15 @@ tick(); setInterval(tick, 1000);
 /* ---------------- save the date (.ics) ---------------- */
 (function(){
   const z = d => new Date(d).toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
-  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//wedding//EN','BEGIN:VEVENT',
+  const E = CONFIG.engagement;
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//wedding//EN',
+    'BEGIN:VEVENT',
+    `UID:${new Date(E.start).getTime()}@engagement`,`DTSTAMP:${z(Date.now())}`,`DTSTART:${z(E.start)}`,`DTEND:${z(E.end)}`,
+    `SUMMARY:Engagement of ${CONFIG.groom} & ${CONFIG.bride}`,
+    `DESCRIPTION:Engagement from 9:30 AM · Feast from 12:00 PM\\nWatch live: ${E.live}`,
+    `LOCATION:${E.venue.replace(/,/g,'\\,')}`,
+    'END:VEVENT',
+    'BEGIN:VEVENT',
     `UID:${M.getTime()}@wedding`,`DTSTAMP:${z(Date.now())}`,`DTSTART:${z(CONFIG.eventStart)}`,`DTEND:${z(CONFIG.eventEnd)}`,
     `SUMMARY:Wedding of ${CONFIG.groom} & ${CONFIG.bride}`,
     `DESCRIPTION:Dinner 7:00 PM · Muhurtham ${B.muhurthamTime}`,
@@ -1121,7 +1218,10 @@ tick(); setInterval(tick, 1000);
 
 /* ---------------- share / copy ---------------- */
 function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2200); }
-const shareText = `You're invited to the wedding of ${CONFIG.groom} & ${CONFIG.bride}\n${B.dateLong} · Muhurtham ${B.muhurthamTime}\n${CONFIG.venue.name}, ${CONFIG.venue.city}`;
+const engDate = fmt({weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}, new Date(CONFIG.engagement.start));
+const shareText = `You're invited to the wedding of ${CONFIG.groom} & ${CONFIG.bride}\n\n` +
+  `Engagement: ${engDate} · from 9:30 AM (feast from 12:00 PM)\n${CONFIG.engagement.venue}\nWatch live: ${CONFIG.engagement.live}\n\n` +
+  `Wedding: ${B.dateLong} · Muhurtham ${B.muhurthamTime}\n${CONFIG.venue.name}, ${CONFIG.venue.city}`;
 const pageUrl = /^https?:/.test(location.protocol) ? location.href.split('#')[0] : '';
 const fullText = pageUrl ? `${shareText}\n${pageUrl}` : shareText;
 const sheet = $('#sheet');
