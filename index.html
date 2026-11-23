@@ -647,6 +647,35 @@ body{overflow-wrap:break-word}
 .event .extra{display:inline-block;margin-top:14px;padding:6px 16px;border-radius:999px;font-family:var(--caps);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--rani-d);
   background:linear-gradient(135deg,#fffdf7,#fbeccb) padding-box,var(--gold-grad) border-box;border:1.5px solid transparent}
 
+/* 12 · 12 section */
+.twelve{position:relative;padding:clamp(80px,10vw,130px) 0;background:linear-gradient(180deg,#fbf1df 0%,var(--ivory) 50%,var(--cream) 100%)}
+.tw-lead{font-style:italic;font-size:clamp(19px,1.8vw,22px);color:var(--ink-soft);margin-top:18px}
+.tw-grid{display:grid;grid-template-columns:1fr;gap:20px;max-width:320px;margin:44px auto 0}
+@media (min-width:720px){.tw-grid{max-width:900px;gap:22px}}
+@media (min-width:720px){.tw-grid{grid-template-columns:repeat(3,1fr)}}
+.tw-card{position:relative;padding:30px 18px 26px;border-radius:120px 120px 22px 22px;border:1.5px solid transparent;
+  background:linear-gradient(180deg,#fff,#fdf6ea) padding-box,var(--gold-grad) border-box;box-shadow:0 18px 40px rgba(8,40,26,.12)}
+.tw-card::before{content:"";position:absolute;inset:8px;border-radius:112px 112px 16px 16px;border:1px solid rgba(192,138,30,.35);pointer-events:none}
+.tw-who{font-family:var(--caps);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-top:14px}
+.tw-day{font-family:var(--serif);font-weight:600;font-size:clamp(56px,7vw,72px);line-height:1;margin-top:10px;color:var(--rani-d)}
+.tw-day i{font-style:normal;color:var(--gold);margin:0 .08em}
+.tw-year{font-family:var(--caps);font-size:22px;letter-spacing:.3em;color:var(--ink);margin-top:6px;padding-left:.3em}
+.tw-name{font-family:var(--script);font-size:34px;color:var(--rani);margin-top:10px}
+.tw-card.ours{background:linear-gradient(180deg,#145a3b,#05261a) padding-box,var(--gold-grad) border-box}
+.tw-card.ours::before{border-color:rgba(244,217,140,.4)}
+.tw-card.ours .tw-day{background:linear-gradient(100deg,#e2b54a,#fff1b8 45%,#d9a93a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tw-card.ours .tw-day i{color:#fff1b8}
+.tw-card.ours .tw-year,.tw-card.ours .tw-name{color:#fff6d6}
+.tw-card.ours .tw-who{color:var(--gold-l)}
+.tw-time{margin:52px auto 0;max-width:620px}
+.tw-clock{display:inline-flex;align-items:center;gap:6px;padding:10px 28px;border-radius:999px;font-family:var(--serif);font-weight:600;font-size:clamp(46px,6vw,64px);line-height:1;color:var(--rani-d);
+  background:linear-gradient(135deg,#fffdf7,#fbeccb) padding-box,var(--gold-grad) border-box;border:1.5px solid transparent;box-shadow:0 12px 28px rgba(192,138,30,.2)}
+.tw-clock i{font-style:normal;color:var(--gold);animation:twblink 1s steps(1) infinite}
+@keyframes twblink{50%{opacity:.2}}
+.tw-time p{font-size:clamp(19px,1.8vw,22px);line-height:1.7;margin-top:18px;color:var(--ink)}
+.tw-time b{font-weight:600;color:var(--rani-d)}
+@media (prefers-reduced-motion:reduce){.tw-clock i{animation:none}}
+
 /* live stream card */
 .event.stream .ic svg{width:52px;height:52px;color:#e62117}
 .event .live-dot{display:inline-block;width:8px;height:8px;margin:0 8px 1px 0;border-radius:50%;background:#ff4d4d;box-shadow:0 0 0 0 rgba(255,77,77,.7);animation:livepulse 1.8s ease-out infinite;vertical-align:middle}
@@ -758,6 +787,42 @@ a.yt:hover .yt-play svg{transform:scale(1.1)}
       </div>
       <div id="storyText"></div>
       <div class="signature couple reveal" data-fill="#0a3a26" data-amp="#b8862b" data-min="30"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 12 · 12 ======================= -->
+<section class="twelve center" id="twelve">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Twelve · Twelve</div>
+      <h2 class="title">Written in the Stars</h2>
+      <svg class="lotus-div" data-icon="lotus" viewBox="0 0 180 26"></svg>
+      <p class="tw-lead">Some dates are chosen. Ours seems to have chosen us.</p>
+    </div>
+    <div class="tw-grid">
+      <div class="tw-card reveal d1">
+        <div class="tw-who">His Birthday</div>
+        <div class="tw-day">12<i>·</i>12</div>
+        <div class="tw-year">1998</div>
+        <div class="tw-name">Sriharsha</div>
+      </div>
+      <div class="tw-card reveal d2">
+        <div class="tw-who">Her Birthday</div>
+        <div class="tw-day">12<i>·</i>12</div>
+        <div class="tw-year">2000</div>
+        <div class="tw-name">Kiranmayi</div>
+      </div>
+      <div class="tw-card ours reveal d3">
+        <div class="tw-who">Our Wedding</div>
+        <div class="tw-day">12<i>·</i>12</div>
+        <div class="tw-year">2026</div>
+        <div class="tw-name">Together</div>
+      </div>
+    </div>
+    <div class="tw-time reveal">
+      <div class="tw-clock"><span>20</span><i>:</i><span>26</span></div>
+      <p>The Muhurtham is at <b>8:26 PM</b> — <b>20:26</b> on the clock, the very year we begin forever.</p>
     </div>
   </div>
 </section>
