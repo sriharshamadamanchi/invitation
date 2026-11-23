@@ -1328,7 +1328,7 @@ const Petals = (function(){
   function make(x, y, vx, vy){ return {x, y, vx, vy, r: 5 + Math.random()*6, a: Math.random()*6.28, va: (Math.random()-.5)*.12, sw: Math.random()*6.28, c: cols[Math.random()*cols.length|0]}; }
   function loop(){
     ctx.clearRect(0,0,W,H);
-    if (ambient && P.length < (W < 700 ? 14 : 24) && Math.random() < .06) P.push(make(Math.random()*W, -20, 0, .6 + Math.random()*.8));
+    if (ambient && P.length < (W < 700 ? 30 : 50) && Math.random() < .15) P.push(make(Math.random()*W, -20, 0, .6 + Math.random()*.8));
     P = P.filter(p => p.y < H + 30 && p.x > -60 && p.x < W + 60);
     for (const p of P) {
       p.sw += .03; p.vx *= .985; p.vy = Math.min(p.vy + .03, 1.6);
