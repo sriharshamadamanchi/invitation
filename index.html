@@ -691,6 +691,49 @@ a.yt:hover .yt-play svg{transform:scale(1.1)}
 .event .extra,.event .yt{opacity:0;transform:translateY(16px);transition:opacity .7s ease calc(var(--st,0s) + 1.4s),transform .9s var(--ease) calc(var(--st,0s) + 1.4s)}
 .event.in .extra,.event.in .yt{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.event .extra,.event .yt{opacity:1!important;transform:none!important}.event .live-dot{animation:none}}
+
+/* engagement glimpse (teaser video) */
+.teaser{position:relative;padding:clamp(70px,9vw,110px) 0;background:linear-gradient(180deg,var(--cream),#fbf1df 55%,var(--cream))}
+.teaser-lead{font-style:italic;font-size:clamp(19px,1.8vw,22px);color:var(--ink-soft);margin-top:18px}
+/* frame: gold rim → deep-green mat → fine gold line → video */
+.teaser-frame{position:relative;margin:52px auto 0;max-width:780px;padding:3px;border-radius:22px;background:var(--gold-grad);
+  box-shadow:0 30px 60px rgba(8,40,26,.28),0 0 0 7px rgba(244,217,140,.22),0 0 0 8px rgba(192,138,30,.35)}
+.tf-mat{position:relative;padding:clamp(14px,2.6vw,24px);border-radius:19px;
+  background:radial-gradient(120% 90% at 50% 0%,#145a3b,#0a3a26 55%,#05261a)}
+.tf-mat::before{content:"";position:absolute;inset:clamp(6px,1.1vw,10px);border-radius:14px;border:1px solid rgba(244,217,140,.55);pointer-events:none}
+.tf-screen{position:relative;aspect-ratio:16/9;padding:2px;border-radius:10px;background:var(--gold-grad);box-shadow:0 8px 22px rgba(0,0,0,.45)}
+.tf-screen video{display:block;width:100%;height:100%;border-radius:8px;background:#000;object-fit:contain;cursor:pointer}
+.tf-corner{position:absolute;width:clamp(38px,6vw,58px);height:clamp(38px,6vw,58px);pointer-events:none;z-index:2;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.tf-corner.tl{top:-2px;left:-2px}.tf-corner.tr{top:-2px;right:-2px;transform:scaleX(-1)}
+.tf-corner.bl{bottom:-2px;left:-2px;transform:scaleY(-1)}.tf-corner.br{bottom:-2px;right:-2px;transform:scale(-1)}
+.tf-crest{position:absolute;left:50%;top:0;transform:translate(-50%,-55%);z-index:3;padding:6px 16px;border-radius:999px;
+  background:linear-gradient(180deg,#145a3b,#05261a) padding-box,var(--gold-grad) border-box;border:2px solid transparent;box-shadow:0 6px 14px rgba(8,40,26,.3)}
+.tf-crest svg{display:block;width:58px;height:31px}
+/* big play button before the first play */
+.teaser-play{position:absolute;inset:2px;border:0;border-radius:8px;cursor:pointer;font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:14px;padding:0 0 7%;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.6))}
+.teaser-play[hidden]{display:none}
+.teaser-play i{display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:rgba(255,250,240,.92);box-shadow:0 0 0 6px rgba(244,217,140,.45),0 10px 24px rgba(0,0,0,.35);transition:transform .3s}
+.teaser-play svg{width:24px;height:24px;margin-left:4px;color:var(--rani-d)}
+.teaser-play b{font-family:var(--caps);font-weight:400;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:#fff6d6;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.teaser-play:hover i{transform:scale(1.08)}
+/* slim custom controls: play/pause, seek, time, mute (no fullscreen) */
+.tf-bar{position:absolute;left:2px;right:2px;bottom:2px;display:flex;align-items:center;gap:12px;padding:26px 14px 10px;border-radius:0 0 8px 8px;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.7));color:#fff6d6;opacity:0;transition:opacity .35s;pointer-events:none}
+.tf-screen.started .tf-bar.show,.tf-screen.started.paused .tf-bar{opacity:1;pointer-events:auto}
+.tf-bar button{display:grid;place-items:center;width:34px;height:34px;flex:none;border:0;border-radius:50%;background:none;color:inherit;cursor:pointer}
+.tf-bar button:hover{background:rgba(244,217,140,.18)}
+.tf-bar svg{width:20px;height:20px}
+.tf-bar .ico-pause,.tf-screen.paused .tf-bar .ico-play{display:block}
+.tf-bar .ico-play,.tf-screen.paused .tf-bar .ico-pause{display:none}
+.tf-bar .ico-muted,.tf-screen.muted .tf-bar .ico-vol{display:none}
+.tf-screen.muted .tf-bar .ico-muted{display:block}
+.tf-seek{flex:1;min-width:0;height:18px;margin:0;-webkit-appearance:none;appearance:none;background:none;cursor:pointer;--p:0%}
+.tf-seek::-webkit-slider-runnable-track{height:4px;border-radius:4px;background:linear-gradient(90deg,#f0cd72 var(--p),rgba(255,246,214,.3) var(--p))}
+.tf-seek::-moz-range-track{height:4px;border-radius:4px;background:linear-gradient(90deg,#f0cd72 var(--p),rgba(255,246,214,.3) var(--p))}
+.tf-seek::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;margin-top:-5px;border-radius:50%;background:#fff1b8;box-shadow:0 0 0 3px rgba(192,138,30,.6)}
+.tf-seek::-moz-range-thumb{width:14px;height:14px;border:0;border-radius:50%;background:#fff1b8;box-shadow:0 0 0 3px rgba(192,138,30,.6)}
+.tf-time{flex:none;font-family:var(--caps);font-size:12px;letter-spacing:.12em;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.tf-bar{gap:6px;padding:20px 8px 6px}.tf-time{font-size:11px;letter-spacing:.04em}}
 </style>
 </head>
 <body class="locked">
@@ -829,6 +872,36 @@ a.yt:hover .yt-play svg{transform:scale(1.1)}
   </div>
 </section>
 
+<!-- ======================= ENGAGEMENT GLIMPSE ======================= -->
+<section class="teaser center" id="teaser">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Engagement Glimpse</div>
+      <h2 class="title">A Little Preview</h2>
+      <svg class="lotus-div" data-icon="lotus" viewBox="0 0 180 26"></svg>
+      <p class="teaser-lead">A few moments from our engagement, before the big day.</p>
+    </div>
+    <div class="teaser-frame reveal d1">
+      <div class="tf-crest"><svg data-icon="lotus" viewBox="62 0 56 30" aria-hidden="true"></svg></div>
+      <div class="tf-mat">
+        <div class="tf-screen paused" id="teaserScreen">
+          <video id="teaserVideo" playsinline preload="none" disablepictureinpicture controlslist="nofullscreen nodownload noremoteplayback"></video>
+          <button class="teaser-play" id="teaserPlay" type="button" aria-label="Play the engagement glimpse video">
+            <i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></i><b>Watch the Glimpse</b>
+          </button>
+          <div class="tf-bar" id="teaserBar">
+            <button type="button" id="tfToggle" aria-label="Play or pause"><svg class="ico-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg><svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
+            <input class="tf-seek" id="tfSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek">
+            <span class="tf-time" id="tfTime">0:00 / 0:00</span>
+            <button type="button" id="tfMute" aria-label="Mute or unmute"><svg class="ico-vol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><svg class="ico-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9l6 6M22 9l-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <span class="tf-corner tl"><svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="url(#gGold)" stroke-linecap="round"><path d="M4 56V20Q4 4 20 4h36" stroke-width="3"/><path d="M12 44V24Q12 12 24 12h20" stroke-width="1.4"/><path d="M22 22q6-8 14-4M22 22q-4 8 0 14" stroke-width="1.4"/></g><circle cx="22" cy="22" r="3.4" fill="url(#gGold)"/><circle cx="56" cy="4" r="2.4" fill="url(#gGold)"/><circle cx="4" cy="56" r="2.4" fill="url(#gGold)"/></svg></span><span class="tf-corner tr"><svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="url(#gGold)" stroke-linecap="round"><path d="M4 56V20Q4 4 20 4h36" stroke-width="3"/><path d="M12 44V24Q12 12 24 12h20" stroke-width="1.4"/><path d="M22 22q6-8 14-4M22 22q-4 8 0 14" stroke-width="1.4"/></g><circle cx="22" cy="22" r="3.4" fill="url(#gGold)"/><circle cx="56" cy="4" r="2.4" fill="url(#gGold)"/><circle cx="4" cy="56" r="2.4" fill="url(#gGold)"/></svg></span><span class="tf-corner bl"><svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="url(#gGold)" stroke-linecap="round"><path d="M4 56V20Q4 4 20 4h36" stroke-width="3"/><path d="M12 44V24Q12 12 24 12h20" stroke-width="1.4"/><path d="M22 22q6-8 14-4M22 22q-4 8 0 14" stroke-width="1.4"/></g><circle cx="22" cy="22" r="3.4" fill="url(#gGold)"/><circle cx="56" cy="4" r="2.4" fill="url(#gGold)"/><circle cx="4" cy="56" r="2.4" fill="url(#gGold)"/></svg></span><span class="tf-corner br"><svg viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="url(#gGold)" stroke-linecap="round"><path d="M4 56V20Q4 4 20 4h36" stroke-width="3"/><path d="M12 44V24Q12 12 24 12h20" stroke-width="1.4"/><path d="M22 22q6-8 14-4M22 22q-4 8 0 14" stroke-width="1.4"/></g><circle cx="22" cy="22" r="3.4" fill="url(#gGold)"/><circle cx="56" cy="4" r="2.4" fill="url(#gGold)"/><circle cx="4" cy="56" r="2.4" fill="url(#gGold)"/></svg></span>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= EVENTS ======================= -->
 <section class="events center" id="events">
   <div class="ev-petals" aria-hidden="true"><i style="--x:6%;--d:0s;--t:16s;--dx:40px;--c:#f59f00"></i><i style="--x:18%;--d:-6s;--t:19s;--dx:-30px;--c:#e8590c"></i><i style="--x:31%;--d:-11s;--t:15s;--dx:50px;--c:#c2185b"></i><i style="--x:44%;--d:-3s;--t:21s;--dx:-40px;--c:#fab005"></i><i style="--x:57%;--d:-9s;--t:17s;--dx:30px;--c:#f76707"></i><i style="--x:69%;--d:-14s;--t:20s;--dx:-50px;--c:#e64980"></i><i style="--x:81%;--d:-5s;--t:18s;--dx:40px;--c:#ffc420"></i><i style="--x:93%;--d:-12s;--t:16s;--dx:-30px;--c:#e8590c"></i><i style="--x:12%;--d:-16s;--t:22s;--dx:20px;--c:#ffffff"></i><i style="--x:75%;--d:-18s;--t:23s;--dx:-20px;--c:#ffffff"></i></div>
@@ -918,6 +991,7 @@ const CONFIG = {
   muhurtham: "2026-12-12T20:26:00+05:30",   // countdown target (IST)
   eventStart: "2026-12-12T19:00:00+05:30",  // used for "Save the Date"
   eventEnd:   "2026-12-12T23:00:00+05:30",
+  live: "https://youtube.com/live/dh5m2dd4QwA",   // wedding live stream
   venue: {
     name: "Sri Sesha Sai Kalyana Vedika",
     city: "Vijayawada",
@@ -925,6 +999,8 @@ const CONFIG = {
     mapQuery: "Sri Sesha Sai Kalyana Vedika, Benz Circle, Vijayawada"
   },
   photo: "",          // optional couple photo, e.g. "assets/couple.jpg" — a monogram shows when empty
+  teaser: "assets/teaser.mp4",        // engagement glimpse video — the section hides when empty
+  teaserPoster: "assets/teaser.jpg",  // still shown before it plays
   musicUrl: "assets/song.mp3", // optional, e.g. "assets/song.mp3" — adds a music button when set
   story: [
     "What started as a chance encounter soon became endless conversations, shared dreams and countless memories together.",
@@ -943,6 +1019,9 @@ const CONFIG = {
       text: "Can't be there in person? Join us online and send your blessings." },
     { name: "Muhurtham", tag: "The Wedding", time: "8:26 PM", icon: "kalash", featured: true,
       text: "The auspicious moment we tie the knot, amidst Vedic chants and the blessings of our elders." },
+    // live stream card, shown beside the muhurtham
+    { stream: "https://youtube.com/live/dh5m2dd4QwA", time: "7:00 PM", label: "wedding",
+      text: "Can't be there in person? Watch the wedding live and send your blessings." },
     { name: "Dinner", tag: "Wedding Feast", time: "7:00 PM", icon: "leaf",
       text: "A traditional wedding feast with family and friends." }
   ]
@@ -1183,7 +1262,7 @@ function streamCard(e, i, when){
     <span class="tag"><i class="live-dot"></i>Live Stream</span>
     <h3>Watch Live</h3>
     <div class="when">${when}<br>from ${e.time}</div>
-    <a class="yt" href="${e.stream}" target="_blank" rel="noopener" data-yt="${id}" aria-label="Play the engagement live stream">
+    <a class="yt" href="${e.stream}" target="_blank" rel="noopener" data-yt="${id}" data-label="${e.label || 'engagement'}" aria-label="Play the ${e.label || 'engagement'} live stream">
       <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" decoding="async">
       <span class="yt-play"><svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2.3 34 .3 34 .3s-21.2 0-26.5 1.4a8.6 8.6 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.6 8.6 0 0 0 6 6C12.8 47.7 34 47.7 34 47.7s21.2 0 26.5-1.4a8.6 8.6 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#e62117"/><path d="M27 34V14l18 10z" fill="#fff"/></svg></span>
     </a>
@@ -1217,7 +1296,7 @@ $('#eventGrid').innerHTML = CONFIG.events.map((e, i) => {
 $$('[data-yt]').forEach(a => a.addEventListener('click', ev => {
   if (!/^https?:$/.test(location.protocol)) return;
   ev.preventDefault();
-  a.outerHTML = `<div class="yt"><iframe src="https://www.youtube.com/embed/${a.dataset.yt}?autoplay=1&rel=0" title="Engagement live stream"
+  a.outerHTML = `<div class="yt"><iframe src="https://www.youtube.com/embed/${a.dataset.yt}?autoplay=1&rel=0" title="${a.dataset.label} live stream"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`;
 }));
@@ -1276,7 +1355,7 @@ tick(); setInterval(tick, 1000);
     'BEGIN:VEVENT',
     `UID:${M.getTime()}@wedding`,`DTSTAMP:${z(Date.now())}`,`DTSTART:${z(CONFIG.eventStart)}`,`DTEND:${z(CONFIG.eventEnd)}`,
     `SUMMARY:Wedding of ${CONFIG.groom} & ${CONFIG.bride}`,
-    `DESCRIPTION:Dinner 7:00 PM · Muhurtham ${B.muhurthamTime}`,
+    `DESCRIPTION:Dinner 7:00 PM · Muhurtham ${B.muhurthamTime}\\nWatch live: ${CONFIG.live}`,
     `LOCATION:${CONFIG.venue.name}\\, ${CONFIG.venue.address.replace(/,/g,'\\,')}`,
     'END:VEVENT','END:VCALENDAR'].join('\r\n');
   const url = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
@@ -1288,7 +1367,7 @@ function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add
 const engDate = fmt({weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}, new Date(CONFIG.engagement.start));
 const shareText = `You're invited to the wedding of ${CONFIG.groom} & ${CONFIG.bride}\n\n` +
   `Engagement: ${engDate} · from 9:30 AM (feast from 12:00 PM)\n${CONFIG.engagement.venue}\nWatch live: ${CONFIG.engagement.live}\n\n` +
-  `Wedding: ${B.dateLong} · Muhurtham ${B.muhurthamTime}\n${CONFIG.venue.name}, ${CONFIG.venue.city}`;
+  `Wedding: ${B.dateLong} · Muhurtham ${B.muhurthamTime}\n${CONFIG.venue.name}, ${CONFIG.venue.city}\nWatch live: ${CONFIG.live}`;
 const pageUrl = /^https?:/.test(location.protocol) ? location.href.split('#')[0] : '';
 const fullText = pageUrl ? `${shareText}\n${pageUrl}` : shareText;
 const sheet = $('#sheet');
@@ -1328,6 +1407,53 @@ function syncMusic(){
 syncMusic();
 ['play','pause'].forEach(ev => audio.addEventListener(ev, syncMusic));
 musicBtn.addEventListener('click', () => { audio.paused ? audio.play().catch(() => {}) : audio.pause(); });
+
+/* ---------------- engagement glimpse ---------------- */
+// background music pauses while the video plays and comes back when it pauses or ends
+(function(){
+  if (!CONFIG.teaser) { $('#teaser').remove(); return; }
+  const v = $('#teaserVideo'), play = $('#teaserPlay'), scr = $('#teaserScreen'), bar = $('#teaserBar'), seek = $('#tfSeek'), time = $('#tfTime');
+  v.src = CONFIG.teaser; if (CONFIG.teaserPoster) v.poster = CONFIG.teaserPoster;
+  const toggle = () => v.paused ? v.play().catch(() => {}) : v.pause();
+  play.addEventListener('click', toggle);
+  $('#tfToggle').addEventListener('click', toggle);
+  $('#tfMute').addEventListener('click', () => { v.muted = !v.muted; scr.classList.toggle('muted', v.muted); });
+  // the controls fade out while playing and come back on any touch or mouse move
+  let hideT;
+  function wake(){ bar.classList.add('show'); clearTimeout(hideT); hideT = setTimeout(() => bar.classList.remove('show'), 2600); }
+  scr.addEventListener('pointermove', wake);
+  v.addEventListener('click', () => { if (matchMedia('(hover: none)').matches && !bar.classList.contains('show')) wake(); else { toggle(); wake(); } });
+  v.addEventListener('dblclick', e => e.preventDefault());
+  const t = x => isFinite(x) ? `${Math.floor(x / 60)}:${pad(Math.floor(x % 60))}` : '0:00';
+  function progress(){
+    const p = v.duration ? v.currentTime / v.duration : 0;
+    if (!seek.matches(':active')) seek.value = Math.round(p * 1000);
+    seek.style.setProperty('--p', (p * 100).toFixed(2) + '%');
+    time.textContent = `${t(v.currentTime)} / ${t(v.duration)}`;
+  }
+  ['timeupdate', 'loadedmetadata', 'seeked'].forEach(ev => v.addEventListener(ev, progress));
+  seek.addEventListener('input', () => { if (v.duration) { v.currentTime = seek.value / 1000 * v.duration; progress(); } wake(); });
+
+  let resume = false;
+  v.addEventListener('play', () => {
+    play.hidden = true; scr.classList.add('started'); scr.classList.remove('paused'); wake();
+    if (!audio.paused) { resume = true; audio.pause(); }
+  });
+  ['pause', 'ended'].forEach(ev => v.addEventListener(ev, () => {
+    scr.classList.add('paused');
+    if (resume) { resume = false; audio.play().catch(() => {}); }
+  }));
+  // at the end: back to the start with the cover image and big play button, without playing
+  v.addEventListener('ended', () => {
+    const d = v.duration;
+    v.load();                      // reloading (preload="none") shows the poster again
+    play.hidden = false; scr.classList.remove('started'); bar.classList.remove('show');
+    seek.value = 0; seek.style.setProperty('--p', '0%');
+    time.textContent = `0:00 / ${t(d)}`;
+  });
+  // turning the music back on mid-video pauses the video
+  audio.addEventListener('play', () => { if (!v.paused) { resume = false; v.pause(); } });
+})();
 
 /* ---------------- petals ---------------- */
 const Petals = (function(){
